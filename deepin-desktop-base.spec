@@ -23,18 +23,9 @@ Base files for Deepin Desktop.
 %prep
 %autosetup -p1
 
-# Remove Deepin distro's lsb-release
-# Don't override systemd timeouts
-# Remove apt-specific templates
 sed -i -E '/lsb-release/d' Makefile
-
-# Fix data path
 sed -i 's|/usr/lib|%{_datadir}|' Makefile
-
-# 修改锁屏背景版本号
 sed -i 's|VERSION := 20 SP1|VERSION := 20|' Makefile
-
-# Set deepin type to Server-Enterprise-C
 sed -i 's|Type=.*|Type=Server-Euler|' files/desktop-version-arm.in
 sed -i 's|Type\[zh_CN\]=.*|Type\[zh_CN\]=服务器欧拉版|' files/desktop-version-arm.in
 
@@ -66,7 +57,6 @@ install -Dm644 files/dde-desktop-watermask.json     %{buildroot}/%{_datadir}/dee
 [ -e files/logind.conf ] && install -Dm644 files/logind.conf   %{buildroot}/%{_sysconfdir}/systemd/logind.conf.d/deepin-base.conf
 
 
-# Make a symlink for deepin-version
 ln -sfv ..%{_datadir}/deepin/desktop-version %{buildroot}/etc/deepin-version
 
 %files
@@ -115,5 +105,5 @@ ln -sfv ..%{_datadir}/deepin/desktop-version %{buildroot}/etc/deepin-version
 %{_datadir}/deepin/distribution/distribution_logo_transparent.svg
 
 %changelog
-* Tue Jan 28 2020 TagBuilder <tagbuilder@linuxdeepin.com> - 2019.07.10-2
-- Project init.
+* Thu Jul 30 2020 openEuler Buildteam <buildteam@openeuler.org> - 2020.03.23-1
+- Package init
