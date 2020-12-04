@@ -1,11 +1,12 @@
 Name:           deepin-desktop-base
 Version:        2020.03.23
-Release:        1
+Release:        2
 Summary:        Base files for Deepin Desktop
 License:        GPLv3
 URL:            https://github.com/linuxdeepin/deepin-desktop-base
 Source0:        %{name}_%{version}.orig.tar.xz	
-BuildArch:     noarch
+BuildArch:      noarch
+Patch1:         0001-fix-logo.patch 
 
 Provides: deepin-appstore-config
 
@@ -105,5 +106,8 @@ ln -sfv ..%{_datadir}/deepin/desktop-version %{buildroot}/etc/deepin-version
 %{_datadir}/deepin/distribution/distribution_logo_transparent.svg
 
 %changelog
+* Sat Dec 05 2020 weidong <weidong@uniontech.com> - 2020.03.23-2
+- fix logo
+
 * Thu Jul 30 2020 openEuler Buildteam <buildteam@openeuler.org> - 2020.03.23-1
 - Package init
