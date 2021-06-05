@@ -1,6 +1,6 @@
 Name:           deepin-desktop-base
 Version:        2020.03.23
-Release:        2
+Release:        4
 Summary:        Base files for Deepin Desktop
 License:        GPLv3
 URL:            https://github.com/linuxdeepin/deepin-desktop-base
@@ -15,7 +15,8 @@ Base files for Deepin Desktop.
 
 %package       -n deepin-desktop-server
 Summary:       Base files for Deepin Desktop
-Requires:      deepin-keyring distro-info-data eject fonts-noto fonts-symbola
+Recommends:     deepin-wallpapers
+Recommends:     deepin-screensaver
 
 
 %description   -n deepin-desktop-server
@@ -27,8 +28,9 @@ Base files for Deepin Desktop.
 sed -i -E '/lsb-release/d' Makefile
 sed -i 's|/usr/lib|%{_datadir}|' Makefile
 sed -i 's|VERSION := 20 SP1|VERSION := 20|' Makefile
-sed -i 's|Type=.*|Type=Server-Euler|' files/desktop-version-arm.in
-sed -i 's|Type\[zh_CN\]=.*|Type\[zh_CN\]=服务器欧拉版|' files/desktop-version-arm.in
+sed -i 's|Type=.*|Type=Desktop|' files/{desktop-version-arm.in,desktop-version.in}
+sed -i 's|Type\[zh_CN\]=.*|Type\[zh_CN\]=社区版|' files/{desktop-version-arm.in,desktop-version.in}
+
 
 %build
 %make_build
@@ -106,6 +108,12 @@ ln -sfv ..%{_datadir}/deepin/desktop-version %{buildroot}/etc/deepin-version
 %{_datadir}/deepin/distribution/distribution_logo_transparent.svg
 
 %changelog
+* Sat Jun 05 2021 weidong <weidong@uniontech.com> - 2020.03.23-4
+- Fix installation dependency errors
+
+* Tue Feb 23 2021 weidong <weidong@uniontech.com> - 2020.03.23-3
+- Update deepin-version 
+
 * Sat Dec 05 2020 weidong <weidong@uniontech.com> - 2020.03.23-2
 - fix logo
 
