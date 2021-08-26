@@ -33,7 +33,7 @@ sed -i 's|/usr/lib|%{_datadir}|' Makefile
 sed -i 's|Type=.*|Type=Desktop|' files/{desktop-version-arm.in,desktop-version.in}
 sed -i 's|Type\[zh_CN\]=.*|Type\[zh_CN\]=社区版|' files/{desktop-version-arm.in,desktop-version.in}
 sed -i 's|Edition=.*|Edition=Y2020E0001|' files/{desktop-version-arm.in,desktop-version.in}
-sed -i 's|Copyright=.*|Copyright=Y2020CR001' files/{desktop-version-arm.in,desktop-version.in}
+sed -i 's|Copyright=.*|Copyright=Y2020CR001|' files/{desktop-version-arm.in,desktop-version.in}
 %make_build
 
 %install
@@ -72,7 +72,7 @@ ln -sfv %{_datadir}/deepin/desktop-version-server %{buildroot}%{_sysconfdir}/dee
 %exclude %{_sysconfdir}/os-version
 
 %changelog
-* Thu Aug 26 2021 weidong <konglidong@uniontech.com - 2020.09.11-1
+* Thu Aug 26 2021 konglidong <konglidong@uniontech.com - 2020.09.11-1
 - Fix versions
 - Fix logos error
 
