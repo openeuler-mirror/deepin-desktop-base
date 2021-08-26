@@ -1,12 +1,12 @@
 Name:           deepin-desktop-base
 Version:        2020.09.11
-Release:        1
+Release:        2
 Summary:        Base files for Deepin Desktop
 License:        GPLv3
 URL:            https://github.com/linuxdeepin/deepin-desktop-base
 Source0:        %{url}/archive/%{version}/%{name}_%{version}.tar.xz
 BuildArch:      noarch
-#Patch1:         0001-fix-logo.patch 
+Patch1:         0001-fix-logo.patch 
 %description
 %{summary}.
 
@@ -23,13 +23,17 @@ Recommends:     deepin-screensaver
 %{summary}.
 
 %prep
-%autosetup -n %{name}-%{version}+dde
+%autosetup -p1 -n %{name}-%{version}+dde
 
 %build
 # Remove Deepin lsb-release
 sed -i '/lsb-release/d' Makefile
 # update lusr/lib/ path
 sed -i 's|/usr/lib|%{_datadir}|' Makefile
+sed -i 's|Type=.*|Type=Desktop|' files/{desktop-version-arm.in,desktop-version.in}
+sed -i 's|Type\[zh_CN\]=.*|Type\[zh_CN\]=社区版|' files/{desktop-version-arm.in,desktop-version.in}
+sed -i 's|Edition=.*|Edition=Y2020E0001|' files/{desktop-version-arm.in,desktop-version.in}
+sed -i 's|Copyright=.*|Copyright=Y2020CR001' files/{desktop-version-arm.in,desktop-version.in}
 %make_build
 
 %install
@@ -68,6 +72,10 @@ ln -sfv %{_datadir}/deepin/desktop-version-server %{buildroot}%{_sysconfdir}/dee
 %exclude %{_sysconfdir}/os-version
 
 %changelog
+* Thu Aug 26 2021 weidong <konglidong@uniontech.com - 2020.09.11-1
+- Fix versions
+- Fix logos error
+
 * Tue Jul 20 2021 weidong <weidong@uniontech.com> - 2020.09.11-1
 - Update 2020.09.11
 
