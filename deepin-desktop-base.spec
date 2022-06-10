@@ -1,12 +1,14 @@
 Name:           deepin-desktop-base
 Version:        2020.09.11
-Release:        2
+Release:        3
 Summary:        Base files for Deepin Desktop
 License:        GPLv3
 URL:            https://github.com/linuxdeepin/deepin-desktop-base
 Source0:        %{url}/archive/%{version}/%{name}_%{version}.tar.xz
 BuildArch:      noarch
 Patch1:         0001-fix-logo.patch 
+Patch1000:      1000-add-riscv64-support.patch
+
 %description
 %{summary}.
 
@@ -72,6 +74,9 @@ ln -sfv %{_datadir}/deepin/desktop-version-server %{buildroot}%{_sysconfdir}/dee
 %exclude %{_sysconfdir}/os-version
 
 %changelog
+* Fri Jun 10 2022 misaka00251 <misaka00251@misakanet.cn> - 2020.09.11-3
+- Add riscv64 support
+
 * Thu Aug 26 2021 konglidong <konglidong@uniontech.com - 2020.09.11-2
 - Fix versions
 - Fix logos error

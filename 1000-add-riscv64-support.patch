@@ -1,0 +1,99 @@
+Author: misaka00251 <misaka00251@misakanet.cn>
+Date:   Fri Jun 10 11:36:23 2022 +0800
+
+	Backport latest riscv64 support patch to openEuler.
+	Use Community version instead of Professional version for riscv64 build.
+
+	The thing is, somebody from UOS said os-license-* in this package was 
+	packaged by mistake, and even if was included, it still will not activate
+	Professional version. So I have no choice.
+
+	Also I can't get ifneq working in the install section, so I have to use a 
+	fake os-license-riscv64 file. Makefile sucks.
+
+diff --git a/Makefile b/Makefile
+index d2ab82d..37f0bbd 100644
+--- a/Makefile
++++ b/Makefile
+@@ -42,6 +42,11 @@ build:
+ 		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/desktop-version-arm-server.in > files/desktop-version-server
+ 		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/os-license-arm > files/os-license
+ 		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/os-version-arm > files/os-version
++        else ifeq (${ARCH_BUILD}, riscv64)
++		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/desktop-version-riscv64.in > files/desktop-version
++		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/desktop-version-riscv64-server.in > files/desktop-version-server
++		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/os-license-riscv64 > files/os-license
++		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/os-version-riscv64 > files/os-version
+         endif
+ 	sed -e "s|@@VERSION@@|20|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/lsb-release.in > files/lsb-release
+ 	sed -e "s|@@VERSION@@|20|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/device/lsb-release.in > files/device/lsb-release
+@@ -56,7 +61,6 @@ install:
+ 	install -Dm644 files/i18n_dependent.json  ${DESTDIR}/usr/share/i18n/i18n_dependent.json
+ 	install -Dm644 files/language_info.json  ${DESTDIR}/usr/share/i18n/language_info.json
+ 	install -Dm644 files/desktop-version ${DESTDIR}/usr/lib/deepin/desktop-version
+-	install -Dm644 files/os-license ${DESTDIR}/var/uos/os-license
+ 	install -Dm644 files/os-version ${DESTDIR}/etc/os-version
+ 	install -Dm644 files/lsb-release     ${DESTDIR}/etc/lsb-release
+ 	install -Dm644 files/appstore.json     ${DESTDIR}/etc/appstore.json
+diff --git a/files/desktop-version-riscv64-server.in b/files/desktop-version-riscv64-server.in
+new file mode 100644
+index 0000000..e66b575
+--- /dev/null
++++ b/files/desktop-version-riscv64-server.in
+@@ -0,0 +1,9 @@
++[Release]
++Version=@@VERSION@@
++Type=Server
++Type[zh_CN]=服务器版
++Edition=Y2020E0002
++Copyright=Y2020CR002
++[Addition]
++Milestone=@@RELEASE@@
++Buildid=build1
+diff --git a/files/desktop-version-riscv64.in b/files/desktop-version-riscv64.in
+new file mode 100644
+index 0000000..be95de2
+--- /dev/null
++++ b/files/desktop-version-riscv64.in
+@@ -0,0 +1,9 @@
++[Release]
++Version=@@VERSION@@
++Type=Desktop
++Type[zh_CN]=社区版
++Edition=Y2020E0001
++Copyright=Y2020CR001
++[Addition]
++Milestone=@@RELEASE@@
++Buildid=build1
+diff --git a/files/os-license-riscv64 b/files/os-license-riscv64
+new file mode 100644
+index 0000000..772906d
+--- /dev/null
++++ b/files/os-license-riscv64
+@@ -0,0 +1,10 @@
++[UOS-System] 
++product_id=AAAZAA
++product_name=桌面
++instruction_type=RISCV64
++version=20
++minor_version=1030
++build_id=103
++system_cn=专业版
++system_en=Professional
++server_sum=ffffffffffffffffffffffffffffffff
+diff --git a/files/os-version-riscv64 b/files/os-version-riscv64
+new file mode 100644
+index 0000000..9566c1d
+--- /dev/null
++++ b/files/os-version-riscv64
+@@ -0,0 +1,10 @@
++[Version] 
++SystemName=deepin
++SystemName[zh_CN]=深度操作系统
++ProductType=Desktop
++ProductType[zh_CN]=桌面
++EditionName=Community
++EditionName[zh_CN]=社区版
++MajorVersion=20
++MinorVersion=1030
++OsBuild=11014.103
