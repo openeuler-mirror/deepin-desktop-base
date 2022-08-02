@@ -2,7 +2,7 @@
 
 Name:           deepin-desktop-base
 Version:        2021.05.24
-Release:        1
+Release:        2
 Summary:        Base files for Deepin Desktop
 License:        GPLv3
 URL:            https://github.com/linuxdeepin/deepin-desktop-base
@@ -22,12 +22,6 @@ Recommends:     deepin-screensaver
 %description    -n deepin-desktop-server
 %{summary}.
 
-%package        -n license-config
-Summary:        uos server license config
-Provides:       license-config >= 0.0.4-3
-Obsoletes:      license-config < 0.0.4-3
-%description    -n license-config
-%{summary}.
 
 %prep
 %autosetup -p1
@@ -37,6 +31,11 @@ Obsoletes:      license-config < 0.0.4-3
 sed -i '/lsb-release/d' Makefile
 # update usr/lib/ path
 sed -i 's|/usr/lib|%{_datadir}|' Makefile
+# 社区版
+sed -i 's|Type=.*|Type=Desktop|' files/{desktop-version-arm-server.in,desktop-version-server.in,desktop-version.in}
+sed -i 's|Type\[zh_CN\]=.*|Type\[zh_CN\]=社区版|' files/{desktop-version-arm-server.in,desktop-version-server.in,desktop-version.in}
+sed -i 's|Edition=.*|Edition=Y2020E0001|' files/{desktop-version-arm-server.in,desktop-version-server.in,desktop-version.in}
+sed -i 's|Copyright=.*|Copyright=Y2020CR001|' files/{desktop-version-arm-server.in,desktop-version-server.in,desktop-version.in}
 %make_build
 
 %install
@@ -50,7 +49,7 @@ install -Dm644 files/systemd.conf  %{buildroot}/%{_sysconfdir}/systemd/system.co
 install -Dm644 files/dde-session-ui.conf  %{buildroot}/etc/deepin/dde-session-ui.conf
 install -Dm644 files/desktop-version-server %{buildroot}%{_datadir}/deepin/desktop-version-server
 ln -sfv %{_datadir}/deepin/desktop-version-server %{buildroot}%{_sysconfdir}/deepin-version
-install -Dm644 files/os-license %{buildroot}/%{_sysconfdir}/.uos/os-license
+#install -Dm644 files/os-license %{buildroot}/%{_sysconfdir}/.uos/os-license
 
 %files -n deepin-desktop-server
 %{_sysconfdir}/deepin-version
@@ -71,12 +70,14 @@ install -Dm644 files/os-license %{buildroot}/%{_sysconfdir}/.uos/os-license
 %exclude %{_sysconfdir}/systemd/system.conf.d/deepin-base.conf
 %exclude %{_sysconfdir}/systemd/user.conf.d/deepin-base.conf
 %exclude %{_datadir}/deepin/desktop-version
+# conflicts with file from package license-config
 %exclude %{_localstatedir}/uos/os-license
-%files -n license-config
-%{_sysconfdir}/.uos/os-license
-%{_sysconfdir}/os-version
+%exclude %{_sysconfdir}/os-version
 
 %changelog
+* Tue Aug 02 2022 liweiganga <liweiganga@uniontech.com> - 2021.05.24-2
+- Modified to Community Edition
+
 * Mon Jul 18 2022 konglidong <konglidong@uniontech.com> - 2021.05.24-1
 - update to 2021.05.24
 
