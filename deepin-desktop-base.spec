@@ -2,7 +2,7 @@
 
 Name:           deepin-desktop-base
 Version:        2021.05.24
-Release:        2
+Release:        3
 Summary:        Base files for Deepin Desktop
 License:        GPLv3
 URL:            https://github.com/linuxdeepin/deepin-desktop-base
@@ -32,7 +32,6 @@ sed -i '/lsb-release/d' Makefile
 # update usr/lib/ path
 sed -i 's|/usr/lib|%{_datadir}|' Makefile
 # 社区版
-sed -i 's|Type=.*|Type=Desktop|' files/{desktop-version-arm-server.in,desktop-version-server.in,desktop-version.in}
 sed -i 's|Type\[zh_CN\]=.*|Type\[zh_CN\]=社区版|' files/{desktop-version-arm-server.in,desktop-version-server.in,desktop-version.in}
 sed -i 's|Edition=.*|Edition=Y2020E0001|' files/{desktop-version-arm-server.in,desktop-version-server.in,desktop-version.in}
 sed -i 's|Copyright=.*|Copyright=Y2020CR001|' files/{desktop-version-arm-server.in,desktop-version-server.in,desktop-version.in}
@@ -75,6 +74,9 @@ ln -sfv %{_datadir}/deepin/desktop-version-server %{buildroot}%{_sysconfdir}/dee
 %exclude %{_sysconfdir}/os-version
 
 %changelog
+* Fri Aug 05 2022 liweiganga <liweiganga@uniontech.com> - 2021.05.24-3
+- fix version type
+
 * Tue Aug 02 2022 liweiganga <liweiganga@uniontech.com> - 2021.05.24-2
 - Modified to Community Edition
 
