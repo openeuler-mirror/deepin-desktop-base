@@ -1,5 +1,5 @@
 Author: misaka00251 <misaka00251@misakanet.cn>
-Date:   Fri Jun 10 11:36:23 2022 +0800
+Date:   Fri Aug 12 11:07:08 2022 +0800
 
 	Backport latest riscv64 support patch to openEuler.
 	Use Community version instead of Professional version for riscv64 build.
@@ -12,12 +12,12 @@ Date:   Fri Jun 10 11:36:23 2022 +0800
 	fake os-license-riscv64 file. Makefile sucks.
 
 diff --git a/Makefile b/Makefile
-index d2ab82d..37f0bbd 100644
+index 1a3e7ca..4071c02 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -42,6 +42,11 @@ build:
+@@ -48,6 +48,11 @@ build:
  		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/desktop-version-arm-server.in > files/desktop-version-server
- 		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/os-license-arm > files/os-license
+ 		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/os-license-arm > files/os-license		
  		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/os-version-arm > files/os-version
 +        else ifeq (${ARCH_BUILD}, riscv64)
 +		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/desktop-version-riscv64.in > files/desktop-version
@@ -26,8 +26,8 @@ index d2ab82d..37f0bbd 100644
 +		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/os-version-riscv64 > files/os-version
          endif
  	sed -e "s|@@VERSION@@|20|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/lsb-release.in > files/lsb-release
- 	sed -e "s|@@VERSION@@|20|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/device/lsb-release.in > files/device/lsb-release
-@@ -56,7 +61,6 @@ install:
+ 
+@@ -61,7 +66,6 @@ install:
  	install -Dm644 files/i18n_dependent.json  ${DESTDIR}/usr/share/i18n/i18n_dependent.json
  	install -Dm644 files/language_info.json  ${DESTDIR}/usr/share/i18n/language_info.json
  	install -Dm644 files/desktop-version ${DESTDIR}/usr/lib/deepin/desktop-version
@@ -35,7 +35,6 @@ index d2ab82d..37f0bbd 100644
  	install -Dm644 files/os-version ${DESTDIR}/etc/os-version
  	install -Dm644 files/lsb-release     ${DESTDIR}/etc/lsb-release
  	install -Dm644 files/appstore.json     ${DESTDIR}/etc/appstore.json
-diff --git a/files/desktop-version-riscv64-server.in b/files/desktop-version-riscv64-server.in
 new file mode 100644
 index 0000000..e66b575
 --- /dev/null
