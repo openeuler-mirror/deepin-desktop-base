@@ -1,6 +1,6 @@
 Name:           deepin-desktop-base
 Version:        2020.03.23
-Release:        2
+Release:        3
 Summary:        Base files for Deepin Desktop
 License:        GPLv3
 URL:            https://github.com/linuxdeepin/deepin-desktop-base
@@ -15,8 +15,8 @@ Base files for Deepin Desktop.
 
 %package       -n deepin-desktop-server
 Summary:       Base files for Deepin Desktop
-Requires:      deepin-keyring distro-info-data eject fonts-noto fonts-symbola
-
+Recommends:    deepin-wallpapers
+Recommends:    deepin-screensaver
 
 %description   -n deepin-desktop-server
 Base files for Deepin Desktop.
@@ -106,6 +106,9 @@ ln -sfv ..%{_datadir}/deepin/desktop-version %{buildroot}/etc/deepin-version
 %{_datadir}/deepin/distribution/distribution_logo_transparent.svg
 
 %changelog
+* Fri Nov 11 2022 liweiganga <liweiganga@uniontech.com> - 2020.03.23-3
+- fix installation dependency errors
+
 * Sat Dec 05 2020 weidong <weidong@uniontech.com> - 2020.03.23-2
 - fix logo
 
