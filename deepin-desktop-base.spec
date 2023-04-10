@@ -1,13 +1,13 @@
 %global         debug_package %{nil}
 
 Name:           deepin-desktop-base
-Version:        2021.05.24
-Release:        3
+Version:        2022.01.27
+Release:        1
 Summary:        Base files for Deepin Desktop
 License:        GPLv3
 URL:            https://github.com/linuxdeepin/deepin-desktop-base
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
-Patch0:         0001-fix-logo.patch
+#Patch0:         0001-fix-logo.patch
 
 %description
 %{summary}.
@@ -74,6 +74,9 @@ ln -sfv %{_datadir}/deepin/desktop-version-server %{buildroot}%{_sysconfdir}/dee
 %exclude %{_sysconfdir}/os-version
 
 %changelog
+* Tue Mar 28 2023 liweiganga <liweiganga@uniontech.com> - 2022.01.27-1
+- update: update to 2022.01.27
+
 * Fri Aug 05 2022 liweiganga <liweiganga@uniontech.com> - 2021.05.24-3
 - fix version type
 
