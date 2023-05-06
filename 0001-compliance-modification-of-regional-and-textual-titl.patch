@@ -1,0 +1,32 @@
+From 8ba2696369dc305a3a011bc922e9207f53f73bf5 Mon Sep 17 00:00:00 2001
+From: leeffo <leeffo@yeah.net>
+Date: Sat, 6 May 2023 11:20:32 +0800
+Subject: [PATCH] compliance modification of regional and textual titles
+
+---
+ files/language_info.json | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/files/language_info.json b/files/language_info.json
+index ff6c66c..e806c03 100644
+--- a/files/language_info.json
++++ b/files/language_info.json
+@@ -842,13 +842,13 @@
+ 		},
+ 		{
+ 			"Locale": "zh_HK.UTF-8",
+-			"Description": "繁體中文(香港)",
++			"Description": "繁体中文(中国香港)",
+ 			"LangCode": "zh-hant",
+ 			"CountryCode": "HK"
+ 		},
+ 		{
+ 			"Locale": "zh_TW.UTF-8",
+-			"Description": "正體中文",
++			"Description": "繁体中文(中国台湾)",
+ 			"LangCode": "zh-hant",
+ 			"CountryCode": "TW"
+ 		},
+-- 
+2.20.1
+
