@@ -1,12 +1,13 @@
 Name:           deepin-desktop-base
 Version:        2020.03.23
-Release:        3
+Release:        4
 Summary:        Base files for Deepin Desktop
 License:        GPLv3
 URL:            https://github.com/linuxdeepin/deepin-desktop-base
 Source0:        %{name}_%{version}.orig.tar.xz	
 BuildArch:      noarch
 Patch1:         0001-fix-logo.patch 
+Patch2:         0001-compliance-modification-of-regional-and-textual-titl.patch 
 
 Provides: deepin-appstore-config
 
@@ -106,6 +107,9 @@ ln -sfv ..%{_datadir}/deepin/desktop-version %{buildroot}/etc/deepin-version
 %{_datadir}/deepin/distribution/distribution_logo_transparent.svg
 
 %changelog
+* Sat May 06 2023 liweiganga <liweiganga@uniontech.com> - 2020.03.23-4
+- compliance modification of regional and textual titles
+
 * Fri Nov 11 2022 liweiganga <liweiganga@uniontech.com> - 2020.03.23-3
 - fix installation dependency errors
 
