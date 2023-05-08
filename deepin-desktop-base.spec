@@ -2,12 +2,12 @@
 
 Name:           deepin-desktop-base
 Version:        2022.01.27
-Release:        1
+Release:        2
 Summary:        Base files for Deepin Desktop
 License:        GPLv3
 URL:            https://github.com/linuxdeepin/deepin-desktop-base
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
-#Patch0:         0001-fix-logo.patch
+Patch0:         0001-compliance-modification-of-regional-and-textual-titl.patch
 
 %description
 %{summary}.
@@ -74,6 +74,9 @@ ln -sfv %{_datadir}/deepin/desktop-version-server %{buildroot}%{_sysconfdir}/dee
 %exclude %{_sysconfdir}/os-version
 
 %changelog
+* Sat May 06 2023 liweiganga <liweiganga@uniontech.com> - 2022.01.27-2
+- feat: compliance modification of regional and textual titles
+
 * Tue Mar 28 2023 liweiganga <liweiganga@uniontech.com> - 2022.01.27-1
 - update: update to 2022.01.27
 
