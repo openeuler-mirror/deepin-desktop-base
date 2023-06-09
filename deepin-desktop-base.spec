@@ -1,12 +1,13 @@
 Name:           deepin-desktop-base
 Version:        2020.09.11
-Release:        2
+Release:        3
 Summary:        Base files for Deepin Desktop
 License:        GPLv3
 URL:            https://github.com/linuxdeepin/deepin-desktop-base
 Source0:        %{url}/archive/%{version}/%{name}_%{version}.tar.xz
 BuildArch:      noarch
 Patch1:         0001-fix-logo.patch 
+Patch2:		0001-add-loongarch64-support-for-deepin-desktop-base.patch
 %description
 %{summary}.
 
@@ -72,6 +73,9 @@ ln -sfv %{_datadir}/deepin/desktop-version-server %{buildroot}%{_sysconfdir}/dee
 %exclude %{_sysconfdir}/os-version
 
 %changelog
+* Wed May 31 2023 Wenlong Zhang<zhangwenlong@loongson.cn> - 2020.09.11-3
+- fix build error for loongarch64
+
 * Thu Aug 26 2021 konglidong <konglidong@uniontech.com - 2020.09.11-2
 - Fix versions
 - Fix logos error
