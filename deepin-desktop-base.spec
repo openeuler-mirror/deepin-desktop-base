@@ -2,13 +2,14 @@
 
 Name:           deepin-desktop-base
 Version:        2022.01.27
-Release:        3
+Release:        4
 Summary:        Base files for Deepin Desktop
 License:        GPLv3
 URL:            https://github.com/linuxdeepin/deepin-desktop-base
 Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 Patch0:         0001-compliance-modification-of-regional-and-textual-titl.patch
 Patch1:         0001-fix-logo.patch
+Patch2:		0001-add-loongarch64-support-for-deepin-desktop-base.patch
 
 %description
 %{summary}.
@@ -75,6 +76,9 @@ ln -sfv %{_datadir}/deepin/desktop-version-server %{buildroot}%{_sysconfdir}/dee
 %exclude %{_sysconfdir}/os-version
 
 %changelog
+* Fri Jun  9 2023 Wenlong Zhang<zhangwenlong@loongson.cn> - 2022.01.27-4
+- fix build error for loongarch64
+
 * Fri Jun 09 2023 lee <liweiganga@uniontech.com> - 2022.01.27-3
 - fix logo
 

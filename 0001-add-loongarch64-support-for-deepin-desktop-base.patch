@@ -1,0 +1,82 @@
+From 1c7fc17a178121b4e960a0eddc58be994da12ff5 Mon Sep 17 00:00:00 2001
+From: Wenlong Zhang <zhangwenlong@loongson.cn>
+Date: Wed, 31 May 2023 03:46:37 +0000
+Subject: [PATCH] add loongarch64 support for deepin-desktop-base
+
+---
+ Makefile                                  |  5 +++++
+ files/desktop-version-loongarch-server.in |  9 +++++++++
+ files/os-license-loongarch                | 11 +++++++++++
+ files/os-version-loongarch                | 10 ++++++++++
+ 4 files changed, 35 insertions(+)
+ create mode 100644 files/desktop-version-loongarch-server.in
+ create mode 100644 files/os-license-loongarch
+ create mode 100644 files/os-version-loongarch
+
+diff --git a/Makefile b/Makefile
+index 1a3e7ca..3f703d1 100644
+--- a/Makefile
++++ b/Makefile
+@@ -48,6 +48,11 @@ build:
+ 		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/desktop-version-arm-server.in > files/desktop-version-server
+ 		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/os-license-arm > files/os-license		
+ 		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/os-version-arm > files/os-version
++        else ifeq (${ARCH_BUILD}, loongarch64)
++		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/desktop-version-loongarch-server.in > files/desktop-version
++		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/desktop-version-loongarch-server.in > files/desktop-version-server
++		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/os-license-loongarch > files/os-license
++		sed -e "s|@@VERSION@@|$(VERSION)|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/os-version-loongarch > files/os-version
+         endif
+ 	sed -e "s|@@VERSION@@|20|g" -e "s|@@RELEASE@@|$(RELEASE)|g" files/lsb-release.in > files/lsb-release
+ 
+diff --git a/files/desktop-version-loongarch-server.in b/files/desktop-version-loongarch-server.in
+new file mode 100644
+index 0000000..e66b575
+--- /dev/null
++++ b/files/desktop-version-loongarch-server.in
+@@ -0,0 +1,9 @@
++[Release]
++Version=@@VERSION@@
++Type=Server
++Type[zh_CN]=服务器版
++Edition=Y2020E0002
++Copyright=Y2020CR002
++[Addition]
++Milestone=@@RELEASE@@
++Buildid=build1
+diff --git a/files/os-license-loongarch b/files/os-license-loongarch
+new file mode 100644
+index 0000000..5dbdae2
+--- /dev/null
++++ b/files/os-license-loongarch
+@@ -0,0 +1,11 @@
++[UOS-System] 
++product_id=AJACAA
++product_name=服务器
++instruction_type=LOONGARCH64
++version=20
++minor_version=1020
++build_id=102
++system_cn=e
++system_en=e
++name_version=v2
++server_sum=
+diff --git a/files/os-version-loongarch b/files/os-version-loongarch
+new file mode 100644
+index 0000000..b6f49cb
+--- /dev/null
++++ b/files/os-version-loongarch
+@@ -0,0 +1,10 @@
++[Version] 
++SystemName=UnionTech OS Server
++SystemName[zh_CN]=统信服务器操作系统
++ProductType=Server
++ProductType[zh_CN]=服务器
++EditionName=e
++EditionName[zh_CN]=e
++MajorVersion=20
++MinorVersion=1020
++OsBuild=12034.102
+-- 
+2.33.0
+
